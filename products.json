@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Chitranshu",
+    "category": "jewelry",
+    "image": "/uploads/1775809886703-Gemini_Generated_Image_8vku8h8vku8h8vku.png"
+  },
+  {
+    "name": "asjd",
+    "category": "household",
+    "image": "/uploads/1775812213017-WhatsApp Image 2026-04-10 at 1.06.51 PM.jpeg"
+  },
+  {
+    "id": 1775817679668,
+    "name": "SANDEEP AGRAWAL",
+    "category": "jewelry",
+    "price": "100",
+    "discount": "10",
+    "image": "/uploads/1775817679660-WhatsApp_Image_2026-04-09_at_3.40.32_PM-removebg-preview.png"
+  },
+  {
+    "id": 1775824993314,
+    "name": "SANDEEP AGRAWAL",
+    "category": "jewelry",
+    "price": "100",
+    "discount": "10",
+    "image": "/uploads/1775824993225-Gemini_Generated_Image_8vku8h8vku8h8vku.png"
+  }
+]

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="product"></div>
+
+<script>
+let id = new URLSearchParams(window.location.search).get("id");
+
+async function loadProduct() {
+  let res = await fetch("/products");
+  let data = await res.json();
+
+  let p = data.find(x => x.id == id);
+
+  let finalPrice = p.price - (p.price * p.discount / 100);
+
+  document.getElementById("product").innerHTML = `
+    <img src="${p.image}" width="300">
+    <h2>${p.name}</h2>
+    <p>₹${finalPrice}</p>
+    <button onclick="addToCart(${p.id})">Add to Cart</button>
+  `;
+}
+
+function addToCart(id) {
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  cart.push(id);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("Added to cart");
+}
+
+loadProduct();
+</script>
+
+</body>
+</html>

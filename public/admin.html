@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Add Product</h2>
+
+<form id="form">
+  <input type="text" name="name" placeholder="Product Name" required><br><br>
+
+  <select name="category">
+    <option value="jewelry">Jewelry</option>
+    <option value="household">Household</option>
+  </select><br><br>
+
+  <input type="file" name="image" required><br><br>
+
+<input type="number" name="price" placeholder="Price" required><br><br>
+<input type="number" name="discount" placeholder="Discount %" required><br><br>
+
+  <button>Add Product</button>
+</form>
+
+<script>
+document.getElementById("form").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  let formData = new FormData(this);
+
+  await fetch("/add-product", {
+    method: "POST",
+    body: formData
+  });
+
+  alert("Product Added!");
+});
+</script>
+
+</body>
+</html>

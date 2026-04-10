@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krishna Collection</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<!-- Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #1a1a1a;
+  color: white;
+}
+
+.site-footer {
+  background-color: #333; /* Dark background */
+  color: #ffffff;
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+.quality-section h2 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #ccc;
+  margin-bottom: 40px;
+  font-size: 0.9rem;
+}
+
+/* Grid Layout */
+.quality-grid {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.quality-box {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 15px;
+}
+
+.icon-container {
+  font-size: 2.5rem;
+  color: #d4af37; /* Gold color for icons */
+}
+
+.text-content h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.text-content p {
+  margin: 5px 0 0 0;
+  color: #bbb;
+  font-size: 0.85rem;
+}
+
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 80px;
+  background: rgba(0,0,0,0.9);
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.section {
+  padding-top: 20px;
+}
+
+.logo img {
+  width: 200px;
+  margin-right: 100px;
+}
+
+.logo h2 {
+  color: gold;
+}
+
+nav a {
+  margin: 0 15px;
+  color: white;
+  text-decoration: none;
+}
+
+nav a {
+  position: relative;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #D4AF37;
+  bottom: -5px;
+  left: 0;
+  transition: 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* HERO */
+
+.hero h1 {
+  font-size: 50px;
+  color: gold;
+}
+
+.hero p {
+  font-size: 20px;
+}
+
+/* SECTION */
+.section {
+  padding: 60px 80px;
+}
+
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  color: #D4AF37;
+  font-size: 32px;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+/* PRODUCTS */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.products {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card {
+  background: #222;
+  border-radius: 15px;
+  padding: 12px;
+  transition: 0.3s;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(212,175,55,0.2);
+}
+
+
+.card img {
+  width: 100%;
+  height: 180px; /* fixed height */
+  object-fit: cover; /* crop nicely */
+  border-radius: 10px;
+}
+.card h3 {
+  font-size: 16px;
+  height: 40px;
+  overflow: hidden;
+}
+.price {
+  margin-top: auto;
+}
+
+
+/* PRICE */
+.price {
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.old {
+  text-decoration: line-through;
+  color: gray;
+  margin-left: 5px;
+}
+
+.discount {
+  color: #D4AF37;
+  margin-left: 5px;
+}
+
+/* BUTTON */
+button {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid gold;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: gold;
+  color: black;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #000;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #D4AF37, transparent);
+}
+
+.divider span {
+  margin: 0 15px;
+  color: #D4AF37;
+  font-size: 18px;
+}
+
+/* WHATSAPP */
+.whatsapp-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 999;
+}
+
+.whatsapp-text {
+  background: white;
+  color: black;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: fadeIn 1s ease;
+}
+
+.whatsapp-btn {
+  width: 50px;
+  height: 50px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  transition: 0.3s;
+}
+
+.whatsapp-btn img {
+  width: 28px;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+</style>
+
+</head>
+
+<body>
+<div class="whatsapp-container">
+  <div class="whatsapp-text">Chat with Us</div>
+  <a href="https://wa.me/917983348682" target="_blank" class="whatsapp-btn">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" />
+  </a>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <img src="logo.png">
+  </div>
+
+  <nav>
+    <a href="#">HOME</a>
+    <a href="#jewelry">JEWELRY</a>
+    <a href="#household">HOUSEHOLD</a>
+    <a href="/cart.html">🛒 Cart</a>
+  </nav>
+</header>
+
+<!-- JEWELRY -->
+<div class="section" id="jewelry">
+<div class="divider"><span>✦ ✦ELEGANT JEWELRY✦ ✦</span></div>
+  <div class="products" id="jewelryList"></div>
+</div>
+
+<!-- HOUSEHOLD -->
+<div class="section" id="household">
+<div class="divider"><span>✦ ✦PREMIUM HOUSEHOLD ITEMS✦ ✦</span></div>
+  <div class="products" id="householdList"></div>
+</div>
+
+<footer>
+<footer class="site-footer">
+  <div class="quality-section">
+    <h2>Quality Promise</h2>
+    <p class="subtitle">Quality Promise branded Quality Krishna Collection</p>
+
+    <div class="quality-grid">
+      <div class="quality-box">
+        <div class="icon-container">
+          <span class="icon">💛</span>
+        </div>
+        <div class="text-content">
+          <h3>CRAFTED CARE</h3>
+          <p>Crafted care and luxury for your crafted...</p>
+        </div>
+      </div>
+
+      <div class="quality-box">
+        <div class="icon-container">
+          <span class="icon">💎</span>
+        </div>
+        <div class="text-content">
+          <h3>PREMIUM MATERIALS</h3>
+          <p>Premium materials and improved quality...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JS LIBRARY -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+// LOAD PRODUCTS
+async function loadProducts() {
+  let res = await fetch("/products");
+  let data = await res.json();
+
+  let jHTML = "";
+  let hHTML = "";
+
+  data.forEach(p => {
+    let finalPrice = p.price - (p.price * p.discount / 100);
+
+    let card = `
+      <div class="card" data-aos="zoom-in" onclick="openProduct(${p.id})">
+        <img src="${p.image}">
+        <h3>${p.name}</h3>
+
+        <div class="price">
+          ₹${finalPrice}
+          <span class="old">₹${p.price}</span>
+          <span class="discount">(${p.discount}% OFF)</span>
+        </div>
+
+        <button onclick="event.stopPropagation(); addToCart(${p.id})">
+          Add to Cart
+        </button>
+      </div>
+    `;
+
+    if (p.category === "jewelry") jHTML += card;
+    else hHTML += card;
+  });
+
+  document.getElementById("jewelryList").innerHTML = jHTML;
+  document.getElementById("householdList").innerHTML = hHTML;
+}
+
+// PRODUCT PAGE
+function openProduct(id) {
+  window.location.href = "/product.html?id=" + id;
+}
+
+// CART
+function addToCart(id) {
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  let item = cart.find(p => p.id === id);
+
+  if (item) {
+    item.qty += 1;
+  } else {
+    cart.push({ id: id, qty: 1 });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("Added to Cart");
+}
+
+// INIT
+AOS.init();
+loadProducts();
+</script>
+
+</body>
+</html>

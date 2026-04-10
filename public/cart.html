@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart - Krishna Collection Cart</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #1a1a1a;
+  color: white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 300px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.logo h2 {
+  margin: 0;
+  color: #D4AF37;
+  font-family: 'Playfair Display', serif;
+}
+
+.back {
+  color: white;
+  text-decoration: none;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 60px;
+  background: #000;
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+}
+
+header h2 {
+  color: #D4AF37;
+  font-family: 'Playfair Display', serif;
+}
+
+/* CONTAINER */
+.container {
+  padding: 50px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  color: #D4AF37;
+}
+
+/* CART ITEM */
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #222;
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.cart-item img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.info {
+  flex: 1;
+}
+
+.info h3 {
+  margin: 0;
+}
+
+.info p {
+  margin: 5px 0;
+  color: #D4AF37;
+}
+
+/* QTY */
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty button {
+  padding: 5px 12px;
+  border: 1px solid #D4AF37;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.qty button:hover {
+  background: #D4AF37;
+  color: black;
+}
+
+/* REMOVE */
+.remove {
+  margin-top: 10px;
+  background: red;
+  border: none;
+  padding: 6px 12px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* TOTAL */
+.total {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 22px;
+  color: #D4AF37;
+}
+
+/* CHECKOUT */
+.checkout-btn {
+  display: block;
+  margin: 30px auto;
+  padding: 12px 25px;
+  border: 1px solid #D4AF37;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.checkout-btn:hover {
+  background: #D4AF37;
+  color: black;
+}
+
+/* EMPTY */
+.empty {
+  text-align: center;
+  margin-top: 50px;
+  color: gray;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logo.png">
+     </div>
+
+  <a href="/" class="back">⬅ Back</a>
+</header>
+
+
+<div class="container">
+  <h1>Your Cart</h1>
+
+  <div id="cart"></div>
+
+  <div class="total" id="total"></div>
+
+  <button class="checkout-btn" onclick="checkout()">Checkout on WhatsApp</button>
+</div>
+
+<script>
+async function loadCart() {
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  let res = await fetch("/products");
+  let data = await res.json();
+
+  let html = "";
+  let total = 0;
+
+  if (cart.length === 0) {
+    document.getElementById("cart").innerHTML = "<div class='empty'>Your cart is empty</div>";
+    document.getElementById("total").innerHTML = "";
+    return;
+  }
+
+  cart.forEach(item => {
+    let p = data.find(x => x.id == item.id);
+    if (!p) return;
+
+    let price = p.price - (p.price * p.discount / 100);
+    let subtotal = price * item.qty;
+    total += subtotal;
+
+    html += `
+      <div class="cart-item">
+        <img src="${p.image}">
+        
+        <div class="info">
+          <h3>${p.name}</h3>
+          <p>₹${price}</p>
+
+          <div class="qty">
+            <button onclick="changeQty(${item.id}, -1)">−</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty(${item.id}, 1)">+</button>
+          </div>
+
+          <button class="remove" onclick="removeItem(${item.id})">Remove</button>
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById("cart").innerHTML = html;
+  document.getElementById("total").innerHTML = "Total: ₹" + total;
+}
+
+function changeQty(id, change) {
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  cart.forEach(item => {
+    if (item.id === id) {
+      item.qty += change;
+      if (item.qty <= 0) item.qty = 1;
+    }
+  });
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  loadCart();
+}
+
+function removeItem(id) {
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  cart = cart.filter(item => item.id !== id);
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  loadCart();
+}
+
+function checkout() {
+  let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  fetch("/products")
+    .then(res => res.json())
+    .then(data => {
+
+      let message = "Order Details:\n";
+
+      cart.forEach(item => {
+        let p = data.find(x => x.id == item.id);
+        if (!p) return;
+
+        message += `${p.name} x ${item.qty}\n`;
+      });
+
+      let number = "917983348682";
+      let url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+      window.open(url);
+    });
+}
+
+loadCart();
+</script>
+
+</body>
+</html>
